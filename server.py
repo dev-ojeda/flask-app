@@ -1,18 +1,12 @@
 from datetime import datetime
 from flask import request
 from app import create_app
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from flask_socketio import SocketIO
 import eventlet
-# from flask_socketio import SocketIO, emit 
 app = create_app()
 CORS(app)
-# app.config['SECRET_KEY'] = 'secret!'
-# auth = app.config
-sio = SocketIO(app,manage_session=True,async_mode="eventlet", cors_allowed_origins="*", ping_timeout=25, ping_interval=10,namespaces=["/chat"])
-# sio = socketio.Server(async_mode="eventlet", cors_allowed_origins="*", ping_timeout=25, ping_interval=10,namespaces=["/chat"])
-# wsgi_app = socketio.WSGIApp(sio, app.wsgi_app)
-# Almacén para las sesiones
+sio = SocketIO(app,manage_session=True,async_mode="eventlet", cors_allowed_origins="*", ping_timeout=25, ping_interval=10,namespaces=['/chat'])
 sessions = {}
 message_queue = []
 
@@ -112,4 +106,3 @@ def handle_message(data):
 
 if __name__ == '__main__':
     eventlet.wsgi.server(eventlet.listen(("0.0.0.0", 5000)), app.wsgi_app)
-    # sio.run(app, host="0.0.0.0", port=5000, debug=True, log_output=True)
