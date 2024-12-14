@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de Entradas</title>
+    <link rel="stylesheet" href="/static/chat.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col">
+                    <!-- <h1>Gestor de Entradas</h1> -->
+                </div>
+                <div class="col">
+                    <!-- <a class="btn btn-primary" href="/add" role="button">Agregar Nueva Entrada</a> -->
+                </div>
+                <div class="col-12">
+                    <h1>Gestor de Chat</h1>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#chatModal">
+                        open
+                    </button>
+                </div>
+                </div>
+                <div class="col">
+                    
+                </div>
+            <div class="row">
+                <div class="col">
+                    <!-- Modal -->
+                    <div class="modal fade" id="chatModal" role="dialog" tabindex="-1" aria-labelledby="chatModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-fullscreen-sm-down">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="chatModalLabel">Chat</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="chat-messages"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="text" id="chat-input" class="form-control"
+                                        placeholder="Escribe un mensaje...">
+                                    <button class="btn btn-primary" id="send-message">Enviar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-3">
+                <div class="col">
+                </div>
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <tr class="table-primary">
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Salario</th>
+                                <th scope="col">Fecha Ingreso</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in entries %}
+                            <tr class="table-secondary">
+                                <th scope="row" class="table-warning">{{ entry["id"] }}</th>
+                                <td>{{ entry["nombre"] }}</td>
+                                <td class="table-success">{{ entry["rol_nombre"] }}</td>
+                                <td>{{ entry["email"] }}</td>
+                                <td>{{ entry["salario"] }}</td>
+                                <td>{{ entry["fecha_registro"] }}</td>
+                                <td class="table-danger">
+                                    <form action="/delete/{{ entry }}" id="frmTabla" method="POST" style="display: inline">
+                                        <button id="btnDelete" type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                    <!-- <form action="/delete/{{ entry['id'] }}" method="POST" style="display:inline;">
+                            <button type="submit">Eliminar</button>
+                        </form> -->
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <div id="responseMessage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script>
+        const socket = io(); // Conecta con el servidor Flask-SocketIO
+        const chatMessagesDiv = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendMessageButton = document.getElementById('send-message');
+        const btnDelete = document.getElementById('btnDelete');
+
+        // Escucha mensajes del servidor
+        socket.on('receive_message', function (data) {
+            debugger;
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.innerHTML = `<span class="username">${data.username}:</span> ${data.message}`;
+            chatMessagesDiv.appendChild(messageDiv);
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight; // Auto-scroll hacia abajo
+        });
+
+        socket.on('server_message', function (data) {
+            debugger;
+            console.log(data)
+        });
+
+        btnDelete.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita recargar la página
+        });
+
+        sendMessageButton.addEventListener("click", function () {
+            debugger;
+            const message = chatInput.value.trim();
+            const username = "CLIENTE";
+            if (username && message) {
+                socket.emit('send_message', { username: username, message: message });
+                chatInput.value = ''; // Limpia el campo de mensaje
+            } else {
+                alert('Por favor ingresa tu nombre y un mensaje.');
+            }
+        })
+    </script>
+</body>
+
+</html>

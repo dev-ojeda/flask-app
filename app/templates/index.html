@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de Entradas</title>
+    <link rel="icon" href="../static/images/favicon.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/chat.css') }}"
+    />
+        <!-- Bootstrap JS y dependencias -->
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="container text-center">
+        <div class="row align-items-center">
+          <div class="col"></div>
+          <div class="col">
+            <!-- <a class="btn btn-primary" href="/add" role="button">Agregar Nueva Entrada</a> -->
+          </div>
+          <div class="col-12">
+            <h1>Gestor de Chat</h1>
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#chatModal"
+            >
+              open
+            </button>
+          </div>
+        </div>
+        <div class="row row-cols-3">
+          <div class="col"></div>
+          <div class="col">
+            <div
+              class="modal fade"
+              id="chatModal"
+              role="dialog"
+              tabindex="-1"
+              aria-labelledby="chatModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-fullscreen-sm-down">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="chatModalLabel">Chat</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="chat-messages"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <input
+                      type="text"
+                      id="chat-input"
+                      class="form-control"
+                      placeholder="Escribe un mensaje..."
+                    />
+                    <button class="btn btn-primary" id="send-message">
+                      Enviar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+        <div class="row row-cols-3">
+          <div class="col">
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+              <div
+                id="liveToast"
+                class="toast"
+                role="alert"
+                aria-live="assertive"
+                aria-atomic="true"
+              >
+                <div id="datos_message" class="toast-header">
+                  <img src="..." class="rounded me-2" alt="..." />
+                  <strong class="me-auto">Bootstrap</strong>
+                  <small id="enviado" class="text-body-secondary"></small>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="toast"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div id="contenido" class="toast-body"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <table id="tblEmpleados" class="table">
+              <thead>
+                <tr class="table-primary">
+                  <th scope="col">ID</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Rol</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Salario</th>
+                  <th scope="col">Fecha Ingreso</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for entry in entries %}
+                <tr class="table-secondary">
+                  <th scope="row" class="table-warning">{{ entry["id"] }}</th>
+                  <td>{{ entry["nombre"] }}</td>
+                  <td class="table-success">{{ entry["rol_nombre"] }}</td>
+                  <td>{{ entry["email"] }}</td>
+                  <td>{{ entry["salario"] }}</td>
+                  <td>{{ entry["fecha_registro"] }}</td>
+                  <td class="table-danger">
+                    <!-- <form action="/delete/{{ entry }}" id="frmTabla" method="POST" style="display: inline">
+                                        <button id="btnDelete" type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form> -->
+                      <button id="btnDelete" data-id="{{ entry['id'] }}" class="btn btn-danger select-row">Eliminar</button>
+ 
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="col">
+            <div id="responseMessage"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  </body>
+</html>
