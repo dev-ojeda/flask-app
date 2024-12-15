@@ -1,13 +1,34 @@
 const socketChat = io("/chat"); // Conecta con el servidor SocketIO en la ns Chat
 const chatBody = document.getElementById('chatBody');
 const chatInput = document.getElementById('chatInput');
-const btnSendMessge = document.getElementById('btnSendMessage')
 
+socketChat.on("connect", () => {
+    console.log("Conectado al namespace /chat");
+    // Enviar un mensaje al servidor
+    const username = "WEB";
+    socketChat.emit("mensaje", { "username": username, "msg": "Hola desde el cliente Web" });
+});
 
-btnSendMessge.addEventListener()
+socketChat.on("disconnect", () => {
+    console.log("Desconectado del namespace /chat");
+});
+
+// Escucha mensajes del servidor
+socketChat.on("respuesta", (data) => {
+    // Add user message
+    const sentMessage = document.createElement('div');
+    sentMessage.classList.add('message', 'sent');
+    sentMessage.textContent = data.mensaje;
+    chatBody.appendChild(sentMessage);
+    // Clear input
+    chatInput.value = "";
+    // Scroll to bottom
+    chatBody.scrollTop = chatBody.scrollHeight;
+});
 
 function sendMessage() {
     const messageText = chatInput.value.trim();
+    const username = "WEB";
     if (messageText === '') return;
 
     // Add sent message
@@ -15,20 +36,9 @@ function sendMessage() {
     sentMessage.classList.add('message', 'sent');
     sentMessage.textContent = messageText;
     chatBody.appendChild(sentMessage);
-
+    socketChat.emit("message_cliente", { "username": username, "msg": messageText });
     // Clear input
     chatInput.value = '';
-
-    // Simulate received message
-    setTimeout(() => {
-        const receivedMessage = document.createElement('div');
-        receivedMessage.classList.add('message', 'received');
-        receivedMessage.textContent = 'This is a response to: ' + messageText;
-        chatBody.appendChild(receivedMessage);
-
-        // Scroll to the bottom
-        chatBody.scrollTop = chatBody.scrollHeight;
-    }, 1000);
 
     // Scroll to the bottom
     chatBody.scrollTop = chatBody.scrollHeight;

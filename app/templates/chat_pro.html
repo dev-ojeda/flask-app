@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Chat Interface</title>
+    <link rel="icon" href="../static/images/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat_pro.css') }}" />
+    <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
 </head>
 <body>
     <div class="chat-container">
@@ -13,8 +16,9 @@
         </div>
         <div class="chat-footer">
             <input type="text" id="chatInput" class="chat-input" placeholder="Type a message...">
-            <button id="btnSendMessage" class="chat-button">Send</button>
+            <button id="btnSendMessage" onclick="sendMessage()" class="chat-button">Send</button>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='js/chat_pro.js') }}"></script>
 </body>
 </html>

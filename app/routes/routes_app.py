@@ -2,7 +2,6 @@ import threading
 from flask import Blueprint, jsonify, make_response, render_template, request
 from icecream import ic
 # from services.eventos_bus import EmpleadoService, EventEmitter
-
 # event_bus = EventEmitter()
 message_queue = []
 queue_lock = threading.Lock()

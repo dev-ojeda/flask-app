@@ -6,7 +6,7 @@ from flask_socketio import SocketIO, emit, Namespace
 from app import create_app
 load_dotenv()
 app = create_app()
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 # Diccionario para mantener los usuarios y mensajes
 sessions = {}
 # Namespace por defecto ('/')
