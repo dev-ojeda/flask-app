@@ -1,7 +1,5 @@
 import queue
 from flask import Flask, redirect, render_template, request, jsonify, url_for
-
-# from flask_socketio import SocketIO, emit
 from flask_socketio import SocketIO, emit
 from services.eventos_bus import EmpleadoService, EventEmitter
 
@@ -19,9 +17,8 @@ class WebApp:
         self.event_bus = EventEmitter()
         self.message_queue = queue.Queue(maxsize=0)
         # Configuración opcional (por ejemplo, claves secretas o configuraciones)
-        self.app.config["SECRET_KEY"] = "clavesecreta"
         # Registrar las rutas
-        self._register_routes()
+        self.registrar_routes()
 
     def cargar_empleados(self) -> list[dict]:
         self.empleado = EmpleadoService(
@@ -35,7 +32,7 @@ class WebApp:
             self.message_queue.put(value)
 
 
-    def _register_routes(self):
+    def registrar_routes(self):
         """Método para definir las rutas de la aplicación."""
 
         @self.app.route("/")
