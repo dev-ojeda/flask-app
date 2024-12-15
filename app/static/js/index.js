@@ -1,11 +1,4 @@
-const socket_io = io("/chat", {
-  auth: {
-    secret: "f9b949af179c2843e5dc08664d598dc98c76c18ef8c55b2be1469156349bdc95",
-  },
-  // enable retries
-  ackTimeout: 10000,
-  retries: 3,
-}); // Conecta con el servidor Flask-SocketIO
+const socket_io = io("/chat"); // Conecta con el servidor Flask-SocketIO
 const chatMessagesDiv = document.getElementById("chat-messages");
 const chatInput = document.getElementById("chat-input");
 const sendMessageButton = document.getElementById("send-message");

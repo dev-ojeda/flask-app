@@ -1,13 +1,11 @@
+import os
+from dotenv import load_dotenv, dotenv_values
 from flask import request
 from icecream import ic
-# from socketio import Server, WSGIApp, Namespace
 from flask_socketio import SocketIO, emit, Namespace
 from app import create_app
+load_dotenv()
 app = create_app()
-# Crear una instancia de Socket.IO (modo asíncrono por defecto)
-# socketio = Server(cors_allowed_origins="*",async_mode="eventlet")  # Permitir todas las conexiones
-# # Crear una aplicación WSGI
-# wsgi_app = WSGIApp(socketio, app.wsgi_app)
 socketio = SocketIO(app)
 # Diccionario para mantener los usuarios y mensajes
 sessions = {}
@@ -32,7 +30,7 @@ def handle_mi_evento(data):
 
 def main():
     ic("Servidor Socket.IO ejecutándose en http://localhost:5000")
-    socketio.run(app, debug=False, host="localhost", port=5000, log_output=True,use_reloader=False)
+    socketio.run(app, debug=False, host=os.getenv("HOST"), port=os.getenv("PORT"), log_output=False,use_reloader=False)
     # eventlet.wsgi.server(eventlet.listen(("localhost", 5000)), app.wsgi_app)
     
 # Namespace personalizado ('/chat')
