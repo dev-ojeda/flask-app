@@ -1,9 +1,10 @@
+import os
+from dotenv import load_dotenv, dotenv_values
 from flask import Flask, render_template
 from flask_socketio import SocketIO, Namespace, emit
 
-
+load_dotenv()
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 # Definir un namespace personalizado
@@ -33,4 +34,4 @@ def index():
 
 if __name__ == '__main__':
     sio = create_socket(app)
-    sio.run(app, debug=True, host='0.0.0.0', port=5000)
+    sio.run(app, debug=False, host=os.getenv("HOST"), port=os.getenv("PORT"))

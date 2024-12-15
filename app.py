@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv, dotenv_values
 import queue
 from flask import Flask, redirect, render_template, request, jsonify, url_for
 from flask_socketio import SocketIO, emit
@@ -9,6 +11,7 @@ class WebApp:
     def __init__(self, name):
         # Crear la instancia de Flask
         self.app = Flask(name)
+        self.environment = load_dotenv()
         self.sio = SocketIO(self.app, cors_allowed_origins="*", ping_timeout=20, ping_interval=10)
         # self.sio = socketio.Server(cors_allowed_origins="*")
         # self.wsgi_app = socketio.WSGIApp(self.socketIO, self.app.wsgi_app)
@@ -225,7 +228,7 @@ class WebApp:
         """Método para ejecutar la aplicación."""
         # eventlet.wsgi.server(eventlet.listen(("0.0.0.0", 5000)), self.wsgi_app)
         # eventlet.wsgi.server(eventlet.listen(("0.0.0.0", 5000)), self.app.wsgi_app)
-        self.sio.run(self.app, debug=True, host="0.0.0.0", port=5000, log_output=True)
+        self.sio.run(self.app, debug=False, host=os.getenv("HOST"), port=os.getenv("PORT"), log_output=True)
         # self.app.run(host=host, port=port, debug=debug)
 
 

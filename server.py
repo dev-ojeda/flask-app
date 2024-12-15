@@ -1,9 +1,12 @@
+import os
+from dotenv import load_dotenv, dotenv_values
 from datetime import datetime
 from flask import request
 from app import create_app
 from flask_cors import CORS
 from flask_socketio import SocketIO
 import eventlet
+load_dotenv()
 app = create_app()
 CORS(app)
 sio = SocketIO(app,manage_session=True,async_mode="eventlet", cors_allowed_origins="*", ping_timeout=25, ping_interval=10,namespaces=['/chat'])
@@ -105,4 +108,4 @@ def handle_message(data):
         )
 
 if __name__ == '__main__':
-    eventlet.wsgi.server(eventlet.listen(("0.0.0.0", 5000)), app.wsgi_app)
+    eventlet.wsgi.server(eventlet.listen((os.getenv("HOST"), os.getenv("PORT"))), app.wsgi_app)
