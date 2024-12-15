@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 from flask import request
 from icecream import ic
 from flask_socketio import SocketIO, emit, Namespace
