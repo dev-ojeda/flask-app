@@ -1,12 +1,11 @@
-import threading 
-from flask import Blueprint, jsonify, make_response, render_template, request
+from flask import jsonify, make_response, render_template, request
 from icecream import ic
+from . import main
 # from services.eventos_bus import EmpleadoService, EventEmitter
 # event_bus = EventEmitter()
 message_queue = []
-queue_lock = threading.Lock()
 # Crear un Blueprint para modular las rutas
-main = Blueprint('main', __name__, template_folder="templates",static_folder="static",static_url_path="/static")
+# main = Blueprint('main', __name__, template_folder="templates",static_folder="static",static_url_path="/static")
 
 # def cargar_empleados() -> list[dict]:
 #     empleado = EmpleadoService(

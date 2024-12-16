@@ -6,19 +6,31 @@ socketChat.on("connect", () => {
     console.log("Conectado al namespace /chat");
     // Enviar un mensaje al servidor
     const username = "WEB";
-    socketChat.emit("mensaje", { "username": username, "msg": "Hola desde el cliente Web" });
+    socketChat.emit("mensaje", { "username": username, "msg": "Cliente Conectado" });
 });
 
-socketChat.on("disconnect", () => {
+socketChat.on("disconnect", (data) => {
     console.log("Desconectado del namespace /chat");
+    // Add user message
+    const username = "WEB";
+    const sentMessage = document.createElement('div');
+    sentMessage.classList.add('message', 'sent');
+    sentMessage.textContent = data.mensaje;
+    chatBody.appendChild(sentMessage);
+    socketChat.emit("mensaje", { "username": username, "msg": "Cliente Desconectado" });
+    // Clear input
+    chatInput.value = "";
+    // Scroll to bottom
+    chatBody.scrollTop = chatBody.scrollHeight;
 });
 
 // Escucha mensajes del servidor
 socketChat.on("respuesta", (data) => {
+    rescibido = JSON.parse(JSON.stringify(data))
     // Add user message
     const sentMessage = document.createElement('div');
     sentMessage.classList.add('message', 'sent');
-    sentMessage.textContent = data.mensaje;
+    sentMessage.textContent = rescibido.username + " : " + rescibido.msg;
     chatBody.appendChild(sentMessage);
     // Clear input
     chatInput.value = "";
