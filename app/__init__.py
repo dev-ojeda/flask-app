@@ -2,11 +2,12 @@ from flask import Flask
 from flask_socketio import SocketIO
 
 # Crear una instancia global de SocketIO
-socketio = SocketIO(cors_allowed_origins="*")
+socketio: SocketIO = SocketIO(cors_allowed_origins="*")
 
-def create_app():
+def create_app() -> Flask:
+
     """Crea e inicializa la aplicación Flask."""
-    app = Flask(__name__.split('.')[0])
+    app: Flask = Flask(__name__.split('.')[0])
     
     # Configuración de la aplicación
     app.config.from_object('app.config.Config')

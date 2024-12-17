@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+  <head >
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestor de Entradas</title>
@@ -17,7 +17,6 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/chat_pro.css') }}"
     />
-        <!-- Bootstrap JS y dependencias -->
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
   </head>
@@ -28,7 +27,6 @@
         <div class="row align-items-center">
           <div class="col"></div>
           <div class="col">
-            <!-- <a class="btn btn-primary" href="/add" role="button">Agregar Nueva Entrada</a> -->
           </div>
           <div class="col-12">
             <h1>Gestor de Chat</h1>
@@ -60,7 +58,6 @@
                                         aria-label="Close"></button>
                   </div>
                   <div class="chat-body" id="chatBody">
-                      <!-- Messages will appear here dynamically -->
                   </div>
                   <div class="chat-footer">
                       <input type="text" id="chatInput" class="chat-input" placeholder="Type a message...">
@@ -120,11 +117,7 @@
                   <td>{{ entry["salario"] }}</td>
                   <td>{{ entry["fecha_registro"] }}</td>
                   <td class="table-danger">
-                    <!-- <form action="/delete/{{ entry }}" id="frmTabla" method="POST" style="display: inline">
-                                        <button id="btnDelete" type="submit" class="btn btn-danger">Eliminar</button>
-                                    </form> -->
                       <button id="btnDelete" data-id="{{ entry['id'] }}" class="btn btn-danger select-row">Eliminar</button>
- 
                   </td>
                 </tr>
                 {% endfor %}
