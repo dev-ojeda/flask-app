@@ -1,0 +1,138 @@
+[
+    {
+        "id": 4,
+        "nombre": "Stillmann",
+        "rol_nombre": "DEV",
+        "email": "scoate3@studiopress.com",
+        "salario": 39.0,
+        "fecha_registro": "2024-04-25 23: 55: 15"
+    },
+    {
+        "id": 11,
+        "nombre": "Isidro",
+        "rol_nombre": "SRE",
+        "email": "ichickena@ifeng.com",
+        "salario": 21.5,
+        "fecha_registro": "2024-04-07 21: 37: 15"
+    },
+    {
+        "id": 12,
+        "nombre": "Oralie",
+        "rol_nombre": "SRE",
+        "email": "ogadesbyb@is.gd",
+        "salario": 16.0,
+        "fecha_registro": "2024-07-26 4: 42: 15"
+    },
+    {
+        "id": 13,
+        "nombre": "Ainslie",
+        "rol_nombre": "DEV",
+        "email": "aclarisc@barnesandnoble.com",
+        "salario": 17.9,
+        "fecha_registro": "2024-06-25 22: 49: 15"
+    },
+    {
+        "id": 14,
+        "nombre": "Haley",
+        "rol_nombre": "ING",
+        "email": "hrubinekd@dedecms.com",
+        "salario": 50.1,
+        "fecha_registro": "2024-06-10 8: 13: 15"
+    },
+    {
+        "id": 15,
+        "nombre": "Clemmy",
+        "rol_nombre": "SRE",
+        "email": "clakentone@lulu.com",
+        "salario": 52.3,
+        "fecha_registro": "2024-04-27 9: 35: 15"
+    },
+    {
+        "id": 16,
+        "nombre": "Ortensia",
+        "rol_nombre": "ING",
+        "email": "otoffettof@sciencedirect.com",
+        "salario": 56.0,
+        "fecha_registro": "2024-02-07 12: 23: 15"
+    },
+    {
+        "id": 17,
+        "nombre": "Mady",
+        "rol_nombre": "DEV",
+        "email": "mlethebridgeg@jalbum.net",
+        "salario": 37.2,
+        "fecha_registro": "2024-03-13 3: 14: 15"
+    },
+    {
+        "id": 18,
+        "nombre": "Deana",
+        "rol_nombre": "ING",
+        "email": "dohareh@cbsnews.com",
+        "salario": 27.4,
+        "fecha_registro": "2024-06-09 7: 29: 15"
+    },
+    {
+        "id": 19,
+        "nombre": "Claudell",
+        "rol_nombre": "ING",
+        "email": "cmattheisi@theglobeandmail.com",
+        "salario": 55.3,
+        "fecha_registro": "2024-06-01 16: 33: 15"
+    },
+    {
+        "id": 20,
+        "nombre": "Griswold",
+        "rol_nombre": "DEV",
+        "email": "gimpsonj@multiply.com",
+        "salario": 24.0,
+        "fecha_registro": "2024-03-05 0: 33: 15"
+    },
+    {
+        "id": 21,
+        "nombre": "Janina",
+        "rol_nombre": "ING",
+        "email": "jpatonk@google.de",
+        "salario": 60.8,
+        "fecha_registro": "2023-12-06 14: 47: 15"
+    },
+    {
+        "id": 22,
+        "nombre": "Tim",
+        "rol_nombre": "SRE",
+        "email": "tmassonl@mozilla.com",
+        "salario": 85.3,
+        "fecha_registro": "2024-07-05 16: 45: 15"
+    },
+    {
+        "id": 23,
+        "nombre": "Malvina",
+        "rol_nombre": "SRE",
+        "email": "mcalkenm@ustream.tv",
+        "salario": 65.9,
+        "fecha_registro": "2024-06-23 2: 09: 15"
+    },
+    {
+        "id": 24,
+        "nombre": "Jordana",
+        "rol_nombre": "SRE",
+        "email": "jgravestonn@vimeo.com",
+        "salario": 31.1,
+        "fecha_registro": "2023-12-26 9: 36: 15"
+    },
+    {
+        "id": 25,
+        "nombre": "Jessi",
+        "rol_nombre": "ING",
+        "email": "jguillfordo@pbs.org",
+        "salario": 21.5,
+        "fecha_registro": "2024-06-08 23: 54: 15"
+    },
+    {
+        "id": 27,
+        "nombre": "Pearle",
+        "rol_nombre": "DEV",
+        "email": "peccleshareq@gnu.org",
+        "salario": 40.7,
+        "fecha_registro": "2024-03-05 6: 47: 15"
+    }
+]

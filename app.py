@@ -41,11 +41,7 @@ class WebApp:
         @self.app.route("/")
         def home():
             return render_template("index.html", entries=self.cargar_empleados())
-
-        @self.app.route("/api/data", methods=["GET"])
-        def api_data():
-            return jsonify({"message": "¡Hola, Flask!", "status": "success"})
-
+        
         # Ruta para mostrar el formulario
         @self.app.route("/form", methods=["GET", "POST"])
         def form():
@@ -97,108 +93,6 @@ class WebApp:
                 return render_template("index.html")
             # empleado.eliminar_empleado()
             # Redirigir a otra página (opcional)
-
-        # Renderizar el formulario en caso de una solicitud GET
-
-        @self.app.route("/form", methods=["POST"])
-        def form_handler():
-            data = request.form
-            return jsonify({"data": data, "message": "Formulario recibido."})
-
-        @self.app.route("/produce", methods=["GET", "POST"])
-        def produce():
-            """Endpoint para produzir mensagens."""
-            # Adiciona a mensagem na fila
-            if request.method == "POST":
-                data = request.get_json(force=True)
-                message = data["message"]
-                self.message_queue.put(message)
-                return (
-                    jsonify({"status": "Mensagem adicionada", "message": message}),
-                    200,
-                )
-            elif request.method == "GET":
-                message = {"message": self.message_queue.get()}
-                return (
-                    jsonify(
-                        {
-                            "status": "success",
-                            "message": message,
-                        }
-                    ),
-                    200,
-                )
-            else:
-                return jsonify({"error": "Mensagem não fornecida"}), 400
-
-        @self.app.route("/consume", methods=["GET", "POST"])
-        def consume():
-            """Endpoint para produzir mensagens."""
-            if request.method == "POST":
-                data = request.get_json(force=True)
-                print(data)
-                response_data = {}
-                response_data["message_received"] = "Recibdo con exito"
-                # self.message_queue.put(message)
-                return (
-                    jsonify(
-                        {
-                            "status": "Message received",
-                            "message": response_data["message_received"],
-                        }
-                    ),
-                    200,
-                )
-            elif request.method == "GET":
-                message = {"message": self.message_queue.get()}
-                return (
-                    jsonify(
-                        {
-                            "status": "success",
-                            "message": message,
-                        }
-                    ),
-                    200,
-                )
-            else:
-                return jsonify({"error": "Mensagem não fornecida"}), 400
-
-        # Ruta de agradecimiento
-        @self.app.route("/thanks")
-        def thanks():
-            return "<h1>¡Gracias por enviar el formulario!</h1>"
-
-        @self.sio.on("cliente_message")
-        def handle_receive_message(data):
-            message = data.get("message")
-            username = data.get("username")
-            if message and username:
-                # Envía el mensaje a todos los clientes conectados
-                emit(
-                    "receive_message",
-                    {"username": username, "message": message},
-                    broadcast=True,
-                )
-            # print(f"Mensaje recibido: {data}")
-            # emit("response", f"Servidor recibió: {data}", broadcast=True)
-
-        @self.sio.on("send_message")
-        def handle_message(data):
-            # Recibe el mensaje desde el cliente y lo retransmite
-            message = data.get("message")
-            username = data.get("username")
-            if message and username:
-                # Envía el mensaje a todos los clientes conectados
-                emit(
-                    "server_message",
-                    {"username": username, "message": message},
-                    broadcast=True,
-                )
-                emit(
-                    "receive_message",
-                    {"username": username, "message": message},
-                    broadcast=True,
-                )
 
         # Manejador de conexión
         # @self.socketIO.on("connect")

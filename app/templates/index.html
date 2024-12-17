@@ -15,7 +15,7 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/chat.css') }}"
+      href="{{ url_for('static', filename='css/chat_pro.css') }}"
     />
         <!-- Bootstrap JS y dependencias -->
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
@@ -53,31 +53,20 @@
               aria-hidden="true"
             >
               <div class="modal-dialog modal-fullscreen-sm-down">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="chatModalLabel">Chat</h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
+                <div class="chat-container">
+                  <div class="chat-header">
+                    <h4 class="chat-title">CHAT</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
-                    <div id="chat-messages"></div>
+                  <div class="chat-body" id="chatBody">
+                      <!-- Messages will appear here dynamically -->
                   </div>
-                  <div class="modal-footer">
-                    <input
-                      type="text"
-                      id="chat-input"
-                      class="form-control"
-                      placeholder="Escribe un mensaje..."
-                    />
-                    <button class="btn btn-primary" id="send-message">
-                      Enviar
-                    </button>
+                  <div class="chat-footer">
+                      <input type="text" id="chatInput" class="chat-input" placeholder="Type a message...">
+                      <button id="btnSendMessage" onclick="sendMessage()" class="chat-button">Send</button>
                   </div>
-                </div>
+              </div>
               </div>
             </div>
           </div>
@@ -148,6 +137,6 @@
         </div>
       </div>
     </div>
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chat_pro.js') }}"></script>
   </body>
 </html>

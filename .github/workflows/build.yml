@@ -1,4 +1,4 @@
-name: Security Analysis with Bandit
+name: SAST with Bandit
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install bandit
+        pip install -r requirements.txt
 
     - name: Run Bandit with ReviewDog
       uses: reviewdog/action-setup@v1

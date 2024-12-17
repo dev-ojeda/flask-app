@@ -1,30 +1,31 @@
+import json
 from flask import jsonify, make_response, render_template, request
 from icecream import ic
 from . import main
-# from services.eventos_bus import EmpleadoService, EventEmitter
-# event_bus = EventEmitter()
 message_queue = []
-# Crear un Blueprint para modular las rutas
-# main = Blueprint('main', __name__, template_folder="templates",static_folder="static",static_url_path="/static")
-
-# def cargar_empleados() -> list[dict]:
-#     empleado = EmpleadoService(
-#         event_bus, "ListarEmpleado", "listar_empleado"
-#     )
-
-#     return empleado.listar_empleado()
+# Ruta del archivo JSON
+def cargar_empleados() -> list[dict]:
+    datos = list[dict]
+    try:
+        with open('resultados.json', 'r', encoding='utf-8') as archivo:
+            datos = json.load(archivo)
+    except FileNotFoundError:
+            ic("Error: El archivo no se encuentra.")
+    except json.JSONDecodeError:
+            ic("Error: El archivo no tiene un formato JSON válido.")
+    return datos
 
 # def get_queue(self, *a):
 #     for value in a:
 #         message_queue.put(value)
 
-# @main.route("/")
-# def index():
-#     return render_template("index.html", entries=cargar_empleados())
-
 @main.route("/")
 def index():
-    return render_template("chat_pro.html")
+    return render_template("index.html", entries=cargar_empleados())
+
+# @main.route("/")
+# def index():
+#     return render_template("chat_pro.html")
     
 @main.route('/select-row', methods=['POST'])
 def select_row():

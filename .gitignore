@@ -9,7 +9,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 *.db
-*.json
 assets/
 build/
 develop-eggs/
@@ -122,7 +121,7 @@ dmypy.json
 .idea
 .vscode
 rest-client.env.json
-
+flask-app.code-workspace
 # Folder view configuration files
 *.DS_Store
 Desktop.ini
