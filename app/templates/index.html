@@ -1,135 +1,69 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head >
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gestor de Entradas</title>
-    <link rel="icon" href="../static/images/favicon.png" type="image/png" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA Dashboard</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png" >
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/chat_pro.css') }}"
-    />
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
-  </head>
+    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-dark text-white" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4">Dashboard</div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Inicio</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Reportes</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Usuarios</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Configuraciones</a>
+            </div>
+        </div>
 
-  <body>
-    <div class="container-fluid">
-      <div class="container text-center">
-        <div class="row align-items-center">
-          <div class="col"></div>
-          <div class="col">
-          </div>
-          <div class="col-12">
-            <h1>Gestor de Chat</h1>
-            <button
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#chatModal"
-            >
-              open
-            </button>
-          </div>
-        </div>
-        <div class="row row-cols-3">
-          <div class="col"></div>
-          <div class="col">
-            <div
-              class="modal fade"
-              id="chatModal"
-              role="dialog"
-              tabindex="-1"
-              aria-labelledby="chatModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog modal-fullscreen-sm-down">
-                <div class="chat-container">
-                  <div class="chat-header">
-                    <h4 class="chat-title">CHAT</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                  </div>
-                  <div class="chat-body" id="chatBody">
-                  </div>
-                  <div class="chat-footer">
-                      <input type="text" id="chatInput" class="chat-input" placeholder="Type a message...">
-                      <button id="btnSendMessage" onclick="sendMessage()" class="chat-button">Send</button>
-                  </div>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col"></div>
-        </div>
-        <div class="row row-cols-3">
-          <div class="col">
-            <div class="toast-container position-fixed bottom-0 end-0 p-3">
-              <div
-                id="liveToast"
-                class="toast"
-                role="alert"
-                aria-live="assertive"
-                aria-atomic="true"
-              >
-                <div id="datos_message" class="toast-header">
-                  <img src="..." class="rounded me-2" alt="..." />
-                  <strong class="me-auto">Bootstrap</strong>
-                  <small id="enviado" class="text-body-secondary"></small>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="toast"
-                    aria-label="Close"
-                  ></button>
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button class="btn btn-dark" id="menu-toggle">Toggle Menu</button>
                 </div>
-                <div id="contenido" class="toast-body"></div>
-              </div>
+            </nav>
+            <div class="container-fluid">
+                <h1 class="mt-4">Dashboard</h1>
+                <div class="row mt-4">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Estadística 1</h5>
+                                <p class="card-text">Datos relevantes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Estadística 2</h5>
+                                <p class="card-text">Datos relevantes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Estadística 3</h5>
+                                <p class="card-text">Datos relevantes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-12">
-            <table id="tblEmpleados" class="table">
-              <thead>
-                <tr class="table-primary">
-                  <th scope="col">ID</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Rol</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Salario</th>
-                  <th scope="col">Fecha Ingreso</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for entry in entries %}
-                <tr class="table-secondary">
-                  <th scope="row" class="table-warning">{{ entry["id"] }}</th>
-                  <td>{{ entry["nombre"] }}</td>
-                  <td class="table-success">{{ entry["rol_nombre"] }}</td>
-                  <td>{{ entry["email"] }}</td>
-                  <td>{{ entry["salario"] }}</td>
-                  <td>{{ entry["fecha_registro"] }}</td>
-                  <td class="table-danger">
-                      <button id="btnDelete" data-id="{{ entry['id'] }}" class="btn btn-danger select-row">Eliminar</button>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          <div class="col">
-            <div id="responseMessage"></div>
-          </div>
         </div>
-      </div>
     </div>
-    <script src="{{ url_for('static', filename='js/chat_pro.js') }}"></script>
-  </body>
+
+    <script defer src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
 </html>
